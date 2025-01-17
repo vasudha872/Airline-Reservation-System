@@ -1,0 +1,66 @@
+create database Airline;
+
+create table Admin(
+	Admin_ID varchar(20) primary key,
+	Name varchar(20),
+	Pswd varchar(20));
+
+create table Customer(
+	User_Name varchar(20) primary key,
+	Pswd varchar(20),
+	Email varchar(30),
+	Phone varchar(13),
+	Age int);
+
+create table Planes(
+    Plane_Name varchar(20) primary key,
+	Class varchar(10),
+	Seats int);
+
+create table Aircraft(
+    Flight_ID varchar(20),
+    Dep_Time DateTime,
+	Arr_Time DateTime,
+	Plane_Name varchar(20),
+	foreign key(Plane_Name) references Planes(Plane_Name) on update cascade on delete cascade,
+    Src varchar(20),
+	Dstn varchar(20),
+	Fare int,
+	Primary key (Flight_ID, Dep_Time) );
+
+
+create table Payment(
+	Type varchar(20) primary key);
+
+create table Records(
+	Book_ID varchar(20) primary key,
+	Flight_ID varchar(20),
+	foreign key(Flight_ID) references Aircraft(Flight_ID) on update cascade,
+    Book_Time DateTime,
+    User_Name varchar(20),
+    foreign key(User_Name) references Customer(User_Name) on delete cascade on update cascade,
+    Payment_Type varchar(20),
+    foreign key(Payment_Type) references Payment(Type) on update cascade
+    );
+
+
+
+DELIMITER $$
+
+
+CREATE TRIGGER Before_Insert_User
+BEFORE INSERT ON customer
+FOR EACH ROW
+BEGIN
+  IF (EXISTS(SELECT 1 FROM customer WHERE User_Name = NEW.User_Name)) THEN
+    SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed due to duplicate mobile number';
+  END IF;
+END$$
+DELIMITER ;
+
+Delimiter //
+CREATE PROCEDURE insert_cust (IN name varchar(20),IN pass varchar(20),IN email varchar(30) ,IN phone varchar(13), ,IN age int)
+BEGIN
+    insert into Customer (User_Name,Pswd,Email,Phone,Age) values (name ,pass,email,phone,age);
+END//
+Delimiter  ;
