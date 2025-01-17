@@ -30,7 +30,7 @@ Schema Design: Normalized tables with primary and foreign key relationships
 
 Languages used:HTML/CSS, php
 
-local server: Apache
+Local server: Apache
 
 **Future Enhancements**
 
