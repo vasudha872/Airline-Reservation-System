@@ -23,8 +23,14 @@ Ensure all foreign key dependencies are satisfied during operations.
 **Technologies Used**
 
 Database: MySQL
+
 Triggers and Procedures: MySQL stored routines for automation and validation
+
 Schema Design: Normalized tables with primary and foreign key relationships
+
+Languages used:HTML/CSS, php
+
+local server: Apache
 
 **Future Enhancements**
 
