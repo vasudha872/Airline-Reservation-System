@@ -1,5 +1,6 @@
 # Airline-Reservation-System
 **Overview**
+
 The Airline Reservation System is a database-driven application designed to manage airline operations effectively. It enables administrators and customers to interact with the system for managing flights, bookings, customer details, and payments. The system leverages structured database schemas, stored procedures, and triggers to ensure data consistency and integrity.
 **How to Use**
 Setup the Database
